@@ -1,6 +1,6 @@
 # Contrastive Denoising Score (CDS)
 
-This repository is the official pytorch implementation of CDS. <br>
+Official pytorch implementation of CDS. <br>
 
 **[Contrastive Denoising Score for Text-guided Latent Diffusion Image Editing](https://arxiv.org/abs/2311.18608)**
 <br>
