@@ -44,8 +44,7 @@ def main():
         generator=generator,
         n_patches=args.n_patches,
         patch_size=args.patch_size,
-        save_path=args.save_path, 
-        num_images_per_prompt=2
+        save_path=args.save_path,
     )
 
     # Save result
