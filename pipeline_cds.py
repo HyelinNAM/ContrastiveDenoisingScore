@@ -1,7 +1,6 @@
 from typing import Any, Optional, Union, Tuple, List, Callable, Dict
 import os
 from PIL import Image
-from tqdm import tqdm
 from torchvision import transforms as tfms
 import torch.optim as optim
 
