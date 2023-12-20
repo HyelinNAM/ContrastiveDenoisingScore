@@ -7,7 +7,7 @@ This repository is the official pytorch implementation of CDS. <br>
 [Hyelin Nam](https://scholar.google.com/citations?user=k6nzq08AAAAJ&hl=en),
 [Gihyun Kwon](https://scholar.google.co.kr/citations?user=yexbg8gAAAAJ&hl=en),
 [Geon Yeong Park](https://scholar.google.co.kr/citations?user=HGF4a14AAAAJ&hl=en), 
-[Jong Chul Ye](hhttps://scholar.google.co.kr/citations?user=HNMjoNEAAAAJ&hl=en)
+[Jong Chul Ye](https://scholar.google.co.kr/citations?user=HNMjoNEAAAAJ&hl=en)
 
 [![Project Website](https://img.shields.io/badge/Project-Website-blue)](https://hyelinnam.github.io/CDS/)
 [![arXiv](https://img.shields.io/badge/arXiv-2312.00845-b31b1b.svg)](https://arxiv.org/abs/2311.18608)
