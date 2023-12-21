@@ -30,7 +30,7 @@ Aside from the actual image generation processes, both DDS and CUT approaches at
 <br>
 The original CUT algorithm requires training an encoder to extract spatial information from the input image, which is inefficient. 
 On the other hand, we calculate CUT loss utilizing <b> the latent representation of self-attention layers</b>.
-Those features have been shown to contain rich spatial information, disentangled from semantic information, which is exactly CUT loss requires
+Those features have been shown to contain rich spatial information, disentangled from semantic information, which is exactly CUT loss requires.
 </p>
 
 
