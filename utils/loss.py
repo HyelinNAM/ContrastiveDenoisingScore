@@ -101,6 +101,7 @@ class DDSLoss:
 
         latent_input = torch.cat([z_t] * 2)
         timestep = torch.cat([timestep] * 2)
+        embedd = embedd.permute(1, 0, 2, 3).reshape(-1, *embedd.shape[2:])
 
         e_t = self.unet(latent_input, timestep, embedd, cross_attention_kwargs=cross_attention_kwargs,).sample
         e_t_uncond, e_t = e_t.chunk(2)

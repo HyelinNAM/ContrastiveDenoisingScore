@@ -26,8 +26,13 @@ class MyCrossAttnProcessor:
         hidden_states = attn.to_out[1](hidden_states)
 
         # save text-conditioned attention map only
-        attn.hs = hidden_states[1:2]
-            
+        # get attention map of ref
+        if hidden_states.shape[0] == 4: 
+            attn.hs = hidden_states[2:3]
+        # get attention map of trg
+        else:
+            attn.hs = hidden_states[1:2]
+
         return hidden_states
 
 def prep_unet(unet):

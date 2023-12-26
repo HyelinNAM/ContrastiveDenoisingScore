@@ -25,7 +25,7 @@ def main():
     parser.add_argument('--patch_size', type=int, nargs='+', default=[1,2], help="size of patches")
     parser.add_argument('--n_patches', type=int, default=256, help="number of patches")
     parser.add_argument('--seed', type=int, default=0, help="random seed")
-    parser.add_argument('--cuda', type=int, default=0, help='gpu device id ')
+    parser.add_argument('--cuda', type=int, default=0, help="gpu device id")
     parser.add_argument('--v4', action='store_false', default=True)
     args = parser.parse_args()
 

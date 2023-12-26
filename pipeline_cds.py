@@ -103,10 +103,6 @@ class CDSPipeline(StableDiffusionPipeline):
             negative_prompt_embeds=negative_prompt_embeds,
         )
 
-        # Prepare timesteps
-        self.scheduler.set_timesteps(num_inference_steps, device=device)
-        timesteps = self.scheduler.timesteps
-
         # Prepare latent variables
         num_channels_latents = self.unet.in_channels
         latents = self.prepare_latents(
@@ -144,15 +140,15 @@ class CDSPipeline(StableDiffusionPipeline):
 
         optimizer = optim.SGD([z_trg], lr=0.1)
 
-        num_warmup_steps = len(timesteps) - num_inference_steps * self.scheduler.order
+        num_warmup_steps = num_inference_steps - num_inference_steps * self.scheduler.order
         with self.progress_bar(total=num_inference_steps) as progress_bar:
-            for i, t in enumerate(timesteps):
+            for i in range(num_inference_steps):
                 optimizer.zero_grad()
 
                 z_t_src, eps, timestep = dds_loss.noise_input(z_src, eps=None, timestep=None)
                 z_t_trg, _, _ = dds_loss.noise_input(z_trg, eps, timestep)
 
-                # reference branch ; get reference attention maps
+                # get score for dds & reference attention maps
                 eps_pred = dds_loss.get_epsilon_prediction(
                     torch.cat((z_t_src, z_t_trg)),
                     torch.cat((timestep, timestep)),
@@ -179,7 +175,7 @@ class CDSPipeline(StableDiffusionPipeline):
 
                     (2000 * loss * w_dds).backward()
 
-                # target branch 
+                # calculate cut loss
                 with torch.enable_grad():
                     z_t_trg, _, _ = dds_loss.noise_input(z_trg, eps, timestep)
                     eps_pred_trg = dds_loss.get_epsilon_prediction(
@@ -203,7 +199,7 @@ class CDSPipeline(StableDiffusionPipeline):
                 optimizer.step()
 
                 # call the callback, if provided
-                if i == len(timesteps) - 1 or ((i + 1) > num_warmup_steps and (i + 1) % self.scheduler.order == 0):
+                if i == num_inference_steps - 1 or ((i + 1) > num_warmup_steps and (i + 1) % self.scheduler.order == 0):
                     progress_bar.update()
                     if callback is not None and i % callback_steps == 0:
                         callback(i, t, latents)
@@ -369,7 +365,7 @@ class CDSPipeline(StableDiffusionPipeline):
             # For classifier free guidance, we need to do two forward passes.
             # Here we concatenate the unconditional and text embeddings into a single batch
             # to avoid doing two forward passes
-            prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds])
-            trg_prompt_embeds = torch.cat([negative_prompt_embeds, trg_prompt_embeds])
+            prompt_embeds = torch.stack([negative_prompt_embeds, prompt_embeds], axis=1)
+            trg_prompt_embeds =  torch.stack([negative_prompt_embeds, trg_prompt_embeds], axis=1)
 
         return prompt_embeds, trg_prompt_embeds

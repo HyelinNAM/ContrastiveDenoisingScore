@@ -1,6 +1,6 @@
 # Contrastive Denoising Score (CDS)
 
-This repository is the official pytorch implementation of CDS. <br>
+Official pytorch implementation of CDS.<br>
 
 **[Contrastive Denoising Score for Text-guided Latent Diffusion Image Editing](https://arxiv.org/abs/2311.18608)**
 <br>
@@ -10,7 +10,7 @@ This repository is the official pytorch implementation of CDS. <br>
 [Jong Chul Ye](https://scholar.google.co.kr/citations?user=HNMjoNEAAAAJ&hl=en)
 
 [![Project Website](https://img.shields.io/badge/Project-Website-blue)](https://hyelinnam.github.io/CDS/)
-[![arXiv](https://img.shields.io/badge/arXiv-2312.00845-b31b1b.svg)](https://arxiv.org/abs/2311.18608)
+[![arXiv](https://img.shields.io/badge/arXiv-2311.18608-b31b1b.svg)](https://arxiv.org/abs/2311.18608)
 
 
 ## Abstract
@@ -30,7 +30,7 @@ Aside from the actual image generation processes, both DDS and CUT approaches at
 <br>
 The original CUT algorithm requires training an encoder to extract spatial information from the input image, which is inefficient. 
 On the other hand, we calculate CUT loss utilizing <b> the latent representation of self-attention layers</b>.
-Those features have been shown to contain rich spatial information, disentangled from semantic information, which is exactly CUT loss requires
+Those features have been shown to contain rich spatial information, disentangled from semantic information, which is exactly CUT loss requires.
 </p>
 
 
