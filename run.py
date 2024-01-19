@@ -20,7 +20,7 @@ def main():
     parser.add_argument('--prompt', type=str, help="source(reference) prompt")
     parser.add_argument('--trg_prompt', type=str, nargs='+', help="target prompt")
     parser.add_argument('--save_path', type=str, default='results', help="save directory")
-    parser.add_argument('--w_cut', type=float, default=0.3, help="weight coefficient for cut loss term")
+    parser.add_argument('--w_cut', type=float, default=3.0, help="weight coefficient for cut loss term")
     parser.add_argument('--w_dds', type=float, default=1.0, help="weight coefficient for dds loss term")
     parser.add_argument('--patch_size', type=int, nargs='+', default=[1,2], help="size of patches")
     parser.add_argument('--n_patches', type=int, default=256, help="number of patches")
