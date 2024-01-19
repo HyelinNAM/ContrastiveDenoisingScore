@@ -42,5 +42,5 @@ pip install -r requirements.txt
 
 ### Usage
 ```bash
-python run.py --img_path sample/cat1.png --prompt "a cat" --trg_prompt "a pig" --w_cut 0.3 --patch_size 1 2 --n_patches 256
+python run.py --img_path sample/cat1.png --prompt "a cat" --trg_prompt "a pig" --w_cut 3.0 --patch_size 1 2 --n_patches 256
 ```
