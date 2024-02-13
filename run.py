@@ -1,12 +1,13 @@
 import os
 import argparse
+from glob import glob
 
 import torch
 
 from pipeline_cds import CDSPipeline
 
 def load_model(args):
-    if args.v4:
+    if not args.v5:
         sd_version = "CompVis/stable-diffusion-v1-4"
     else:
         sd_version = "runwayml/stable-diffusion-v1-5"
@@ -26,7 +27,7 @@ def main():
     parser.add_argument('--n_patches', type=int, default=256, help="number of patches")
     parser.add_argument('--seed', type=int, default=0, help="random seed")
     parser.add_argument('--cuda', type=int, default=0, help="gpu device id")
-    parser.add_argument('--v4', action='store_false', default=True)
+    parser.add_argument('--v5', action='store_true', default=False)
     args = parser.parse_args()
 
     # Prepare model
@@ -36,19 +37,24 @@ def main():
     stable = stable.to(device)
     generator = torch.Generator(device).manual_seed(args.seed)
 
-    # Inference
-    result = stable(
-        img_path=args.img_path,
-        prompt=args.prompt,
-        trg_prompt=args.trg_prompt,
-        generator=generator,
-        n_patches=args.n_patches,
-        patch_size=args.patch_size,
-        save_path=args.save_path,
-    )
+    img_files = sorted(glob(os.path.join(args.img_path, '*.jpg')))
 
-    # Save result
-    result.save(os.path.join(args.save_path, 'results.png'))
+    # Inference
+    for img_file in img_files:
+        print(img_file)
+        
+        result = stable(
+            img_path=img_file,
+            prompt=args.prompt,
+            trg_prompt=args.trg_prompt,
+            generator=generator,
+            n_patches=args.n_patches,
+            patch_size=args.patch_size,
+            save_path=args.save_path,
+        )
+
+        # Save result
+        result.save(os.path.join(args.save_path, os.path.basename(img_file)))
 
 if __name__ == '__main__':    
     main()
