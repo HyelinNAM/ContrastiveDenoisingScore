@@ -28,7 +28,7 @@ class CDSPipeline(StableDiffusionPipeline):
             else:
                 vae_magic = 0.18215
                 img = Image.open(img_path).convert('RGB').resize((512, 512))
-                img = tfms.ToTensor()(img).unsqueeze(0).to(device)
+                img = tfms.ToTensor()(img).unsqueeze(0).to(device, dtype)
                 with torch.no_grad():
                      latents = self.vae.encode(img.to(device=device)*2 -1)
                 latents = latents['latent_dist'].mean * vae_magic

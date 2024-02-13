@@ -4,16 +4,7 @@ from glob import glob
 
 import torch
 
-from pipeline_cds import CDSPipeline
-
-def load_model(args):
-    if not args.v5:
-        sd_version = "CompVis/stable-diffusion-v1-4"
-    else:
-        sd_version = "runwayml/stable-diffusion-v1-5"
-    stable = CDSPipeline.from_pretrained(sd_version)
-    return stable
-
+from utils.utils import load_model
 
 def main():
     parser = argparse.ArgumentParser()
@@ -28,6 +19,7 @@ def main():
     parser.add_argument('--seed', type=int, default=0, help="random seed")
     parser.add_argument('--cuda', type=int, default=0, help="gpu device id")
     parser.add_argument('--v5', action='store_true', default=False)
+    parser.add_argument("--torch_dtype", type=str, default="fp16", choices=["no", "fp16", "bf16"], help="dtype for less vram memory")
     args = parser.parse_args()
 
     # Prepare model
@@ -37,8 +29,11 @@ def main():
     stable = stable.to(device)
     generator = torch.Generator(device).manual_seed(args.seed)
 
-    img_files = sorted(glob(os.path.join(args.img_path, '*.jpg')))
-
+    if os.path.isdir(args.img_path):
+        img_files = sorted(glob(os.path.join(args.img_path, '*.jpg')))
+    else:
+        img_files = [args.img_path]
+        
     # Inference
     for img_file in img_files:
         print(img_file)
