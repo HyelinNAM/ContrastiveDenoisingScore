@@ -15,7 +15,7 @@ def load_model(args):
         sd_version = "runwayml/stable-diffusion-v1-5"
 
     weight_dtype = torch.float32
-    if args.troch_dtype == 'fp16':
+    if args.torch_dtype == 'fp16':
         weight_dtype = torch.float16
     elif args.torch_dtype == 'bf16':
         weight_dtype = torch.bfloat16
