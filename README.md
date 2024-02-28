@@ -1,4 +1,4 @@
-# Contrastive Denoising Score (CDS)
+# [CVPR 2024] Contrastive Denoising Score (CDS)
 
 Official pytorch implementation of CDS.<br>
 
