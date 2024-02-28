@@ -104,7 +104,7 @@ class CDSPipeline(StableDiffusionPipeline):
         )
 
         # Prepare latent variables
-        num_channels_latents = self.unet.in_channels
+        num_channels_latents = self.unet.config.in_channels
         latents = self.prepare_latents(
             batch_size * num_images_per_prompt,
             num_channels_latents,
@@ -120,7 +120,7 @@ class CDSPipeline(StableDiffusionPipeline):
         # Update latents
         # timestep ~ U(0.05, 0.95) to avoid very high/low noise level
         self.num_train_timesteps = 1000
-        self.min_step =   int(self.num_train_timesteps * 0.05) # 50
+        self.min_step = int(self.num_train_timesteps * 0.05) # 50
         self.max_step = int(self.num_train_timesteps * 0.95) # 950
 
         # Define loss class
