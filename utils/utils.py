@@ -3,7 +3,6 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 import torch
-from transformers import CLIPTextModel, CLIPTokenizer
 from diffusers import AutoencoderKL, DDPMScheduler,  UNet2DConditionModel
 
 from pipeline_cds import CDSPipeline
