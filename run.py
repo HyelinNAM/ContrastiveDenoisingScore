@@ -11,6 +11,7 @@ def main():
     parser.add_argument('--img_path', type=str, default='sample/cat1.png', help="img file path")
     parser.add_argument('--prompt', type=str, help="source(reference) prompt")
     parser.add_argument('--trg_prompt', type=str, nargs='+', help="target prompt")
+    parser.add_argument('--num_inference_steps', type=int, default=200, help="inference steps")
     parser.add_argument('--save_path', type=str, default='results', help="save directory")
     parser.add_argument('--w_cut', type=float, default=3.0, help="weight coefficient for cut loss term")
     parser.add_argument('--w_dds', type=float, default=1.0, help="weight coefficient for dds loss term")
@@ -42,6 +43,7 @@ def main():
             img_path=img_file,
             prompt=args.prompt,
             trg_prompt=args.trg_prompt,
+            num_inference_steps=args.num_inference_steps,
             generator=generator,
             n_patches=args.n_patches,
             patch_size=args.patch_size,
