@@ -46,3 +46,15 @@ pip install transformers==4.32.1
 ```bash
 python run.py --img_path sample/cat1.png --prompt "a cat" --trg_prompt "a pig" --w_cut 3.0 --patch_size 1 2 --n_patches 256
 ```
+
+## Citation
+If you find our work interesting, please cite our paper.
+```bibtex
+@InProceedings{Nam_2024_CVPR,
+    author    = {Nam, Hyelin and Kwon, Gihyun and Park, Geon Yeong and Ye, Jong Chul},
+    title     = {Contrastive Denoising Score for Text-guided Latent Diffusion Image Editing},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {9192-9201}
+}
